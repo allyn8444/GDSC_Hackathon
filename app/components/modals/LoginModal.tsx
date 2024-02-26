@@ -109,6 +109,7 @@ const LoginModal = () => {
               text-neutral-800
               cursor-pointer 
               hover:underline
+              font-semibold
             "
           >
             {" "}
