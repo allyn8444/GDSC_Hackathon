@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 interface ContainerProps {
-  children: React.ReactNode
-};
+  children: React.ReactNode;
+}
 
 const Container: React.FC<ContainerProps> = ({ children }) => {
-  return ( 
+  return (
     <div
       className="
         max-w-[2520px]
@@ -14,11 +14,13 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
         md:px-10
         sm:px-2
         px-4
+        text-white
+       
       "
     >
       {children}
     </div>
-   );
-}
- 
+  );
+};
+
 export default Container;

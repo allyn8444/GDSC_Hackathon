@@ -23,7 +23,7 @@ const Search = () => {
       return getByValue(locationValue as string)?.label;
     }
 
-    return "Anywhere";
+    return "Place";
   }, [locationValue, getByValue]);
 
   const durationLabel = useMemo(() => {
@@ -39,7 +39,7 @@ const Search = () => {
       return `${diff} Days`;
     }
 
-    return "Any Week";
+    return "Day";
   }, [startDate, endDate]);
 
   const guestLabel = useMemo(() => {
@@ -47,16 +47,18 @@ const Search = () => {
       return `${guestCount} Guests`;
     }
 
-    return "Add Guests";
+    return "No. of Renter";
   }, [guestCount]);
 
   return (
     <div
       onClick={searchModal.onOpen}
       className="
+      text-black
+      bg-white
         border-[1px] 
-        w-full 
-        md:w-auto 
+        w-auto
+        
         py-2 
         rounded-full 
         shadow-sm 
@@ -75,12 +77,48 @@ const Search = () => {
       >
         <div
           className="
-            text-sm 
-            font-semibold 
-            px-6
+          text-sm 
+            pl-2
+            pr-2 
+            font-semibold
+            flex 
+            flex-row 
+            items-center 
+            gap-3
           "
         >
-          {locationLabel}
+          <div
+            className="
+              p-2 
+              bg-[#10a37f]
+              rounded-full 
+              text-white
+            "
+          >
+            <BiSearch size={18} />
+          </div>
+          <div className="hidden sm:block">
+            {/* TODO: develop navbar components 
+            
+            currently, pressing search will open filters,
+            I need to create a button and transfer that functionality to 'filter' button
+
+            Remember that we have categories, you should show that when search button is clicked
+            
+            */}
+            {locationLabel === " " ? (
+              <>
+                <div className="flex flex-col">
+                  <div className="text-lg">Diin ka makadto?</div>
+                  <span className="text-gray-600 font-normal">
+                    Search for destination!
+                  </span>
+                </div>
+              </>
+            ) : (
+              locationLabel
+            )}
+          </div>
         </div>
         <div
           className="
@@ -94,31 +132,16 @@ const Search = () => {
             text-center
           "
         >
-          {durationLabel}
+          {guestLabel}
         </div>
         <div
           className="
-            text-sm 
-            pl-6 
-            pr-2 
-            text-gray-600 
-            flex 
-            flex-row 
-            items-center 
-            gap-3
+          text-sm 
+          font-semibold 
+          px-6
           "
         >
-          <div className="hidden sm:block">{guestLabel}</div>
-          <div
-            className="
-              p-2 
-              bg-[#10a37f]
-              rounded-full 
-              text-white
-            "
-          >
-            <BiSearch size={18} />
-          </div>
+          {durationLabel}
         </div>
       </div>
     </div>

@@ -110,24 +110,36 @@ const Categories = () => {
 
   return (
     <Container>
-      <div
-        className="
-          pt-4
+      <div className="   flex justify-center">
+        <div
+          className="
+         grid
+     bg-white
+         grid-cols-3
+        p-5
+        gap-3
+    rounded-2xl
+    shadow-2xl
+         w-[50%]
+  
+       
+        "
+        >
+          {/*  pt-4
           flex 
           flex-row 
           items-center 
           justify-between
-          overflow-x-auto
-        "
-      >
-        {categories.map((item) => (
-          <CategoryBox
-            key={item.label}
-            label={item.label}
-            icon={item.icon}
-            selected={category === item.label}
-          />
-        ))}
+          overflow-x-auto */}
+          {categories.map((item) => (
+            <CategoryBox
+              key={item.label}
+              label={item.label}
+              icon={item.icon}
+              selected={category === item.label}
+            />
+          ))}
+        </div>
       </div>
     </Container>
   );

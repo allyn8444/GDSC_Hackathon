@@ -156,6 +156,7 @@ const RentModal = () => {
     </div>
   );
 
+  // FOR MAP
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">

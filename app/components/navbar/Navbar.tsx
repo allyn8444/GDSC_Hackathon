@@ -1,5 +1,3 @@
-"use client";
-
 import { SafeUser } from "@/app/types";
 
 import Categories from "./Categories";
@@ -7,27 +5,21 @@ import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
-import { useState, useEffect } from "react";
+import Filter from "./Filter";
+import OpenMap from "./OpenMap";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div
         className="
           py-4 
           border-b-[1px]
+          bg-[#10a37f]
         "
       >
         <Container>
@@ -39,18 +31,38 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
             justify-between
             gap-3
             md:gap-0
+            
           "
           >
             <Logo />
-            {/* TODO: change layout of navbar in logged in and not */}
-            {!currentUser ? <Search /> : ""}
-
-            {currentUser && screenWidth < 1180 ? <Search /> : ""}
+            <div className="md:hidden ">
+              {/* <Search /> */}
+              <div className=" w-auto flex">
+                <Search />
+                <div className="w-auto px-3  mx-5 flex justify-center items-center rounded-full border-2 border-white">
+                  <Filter />
+                </div>
+                <div className="w-auto px-3 flex justify-center items-center rounded-full border-2 border-white">
+                  <OpenMap />
+                </div>
+              </div>
+            </div>
             <UserMenu currentUser={currentUser} />
           </div>
         </Container>
       </div>
-      <Categories />
+      <div className="hidden md:inline-flex w-full h-[6.75rem] flex justify-center items-center">
+        <div className=" w-auto flex">
+          <Search />
+          <div className="w-[7.5rem] h-[3.25rem] mx-10 flex justify-center items-center rounded-lg border-2 border-black">
+            <Filter />
+          </div>
+          <div className="w-[7.5rem] h-[3.25rem] flex justify-center items-center rounded-lg border-2 border-black">
+            <OpenMap />
+          </div>
+        </div>
+      </div>
+      {/* <Categories /> */}
     </div>
   );
 };

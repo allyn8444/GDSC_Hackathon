@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useRentModal from "@/app/hooks/useRentModal";
-import Search from "./Search";
 import { SafeUser } from "@/app/types";
 
 import MenuItem from "./MenuItem";
@@ -27,14 +26,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
@@ -50,83 +41,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        {/* TODO: CHANGE HERE LATER */}
-        {currentUser && screenWidth >= 1180 ? (
-          <>
-            <Search />
-            <div
-              onClick={() => router.push("/trips")}
-              className="
-            hidden
-            md:block
-            text-sm 
-            font-semibold 
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition 
-            cursor-pointer
-          "
-            >
-              Trips
-            </div>
-            <div
-              onClick={() => router.push("/favorites")}
-              className="
-            hidden
-            md:block
-            text-sm 
-            font-semibold 
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition 
-            cursor-pointer
-          "
-            >
-              Favorites
-            </div>
-
-            <div
-              onClick={() => router.push("/reservations")}
-              className="
-            hidden
-            md:block
-            text-sm 
-            font-semibold 
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition 
-            cursor-pointer
-          "
-            >
-              Reservations
-            </div>
-            <div
-              onClick={() => router.push("/properties")}
-              className="
-            hidden
-            md:block
-            text-sm 
-            font-semibold 
-            py-3 
-            px-4 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition 
-            cursor-pointer
-          "
-            >
-              Properties
-            </div>
-          </>
-        ) : (
-          ""
-        )}
         <div
           onClick={onRent}
           className="
@@ -137,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             py-3 
             px-4 
             rounded-full 
-            hover:bg-neutral-100 
+            hover:underline
             transition 
             cursor-pointer
           "
@@ -174,7 +88,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             absolute 
             rounded-xl 
             shadow-md
-            w-fit
+            w-[40vw]
+            md:w-3/4 
             bg-white 
             overflow-hidden 
             right-0 
@@ -182,23 +97,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             text-sm
           "
         >
-          <div className="flex flex-col cursor-pointer">
-            {currentUser && screenWidth < 1180 ? (
+          <div className="flex flex-col cursor-pointer text-black">
+            {currentUser ? (
               <>
-                <MenuItem label="Trips" onClick={() => router.push("/trips")} />
                 <MenuItem
-                  label="Favorites"
+                  label="My trips"
+                  onClick={() => router.push("/trips")}
+                />
+                <MenuItem
+                  label="My favorites"
                   onClick={() => router.push("/favorites")}
                 />
                 <MenuItem
-                  label="Reservations"
+                  label="My reservations"
                   onClick={() => router.push("/reservations")}
                 />
                 <MenuItem
-                  label="Properties"
+                  label="My properties"
                   onClick={() => router.push("/properties")}
                 />
-                <MenuItem label="Create Post" onClick={rentModal.onOpen} />
+                <MenuItem label="Airbnb your home" onClick={rentModal.onOpen} />
                 <hr />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -6,16 +6,19 @@ import { useRouter } from "next/navigation";
 const Logo = () => {
   const router = useRouter();
 
-  return ( 
-    <Image
-      onClick={() => router.push('/')}
-      className="hidden md:block cursor-pointer" 
-      src="/images/logo.png" 
-      height="100" 
-      width="100" 
-      alt="Logo" 
-    />
-   );
-}
- 
+  return (
+    <div className="w-fit flex justify-center items-center hidden md:inline-flex">
+      <Image
+        onClick={() => router.push("/")}
+        className=" cursor-pointer"
+        src="/images/logo.png"
+        height="100"
+        width="100"
+        alt="Logo"
+      />
+      <span className="ml-[2rem]">Your lodging, your way</span>
+    </div>
+  );
+};
+
 export default Logo;
