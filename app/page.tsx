@@ -2,15 +2,13 @@ import Container from "@/app/components/Container";
 import ListingCard from "@/app/components/listings/ListingCard";
 import EmptyState from "@/app/components/EmptyState";
 
-import getListings, { 
-  IListingsParams
-} from "@/app/actions/getListings";
+import getListings, { IListingsParams } from "@/app/actions/getListings";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 
 interface HomeProps {
-  searchParams: IListingsParams
-};
+  searchParams: IListingsParams;
+}
 
 const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
@@ -27,7 +25,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <ClientOnly>
       <Container>
-        <div 
+        <div
           className="
             pt-24
             grid 
@@ -38,6 +36,7 @@ const Home = async ({ searchParams }: HomeProps) => {
             xl:grid-cols-5
             2xl:grid-cols-6
             gap-8
+            text-black
           "
         >
           {listings.map((listing: any) => (
@@ -47,10 +46,16 @@ const Home = async ({ searchParams }: HomeProps) => {
               data={listing}
             />
           ))}
+          <iframe
+            src="https://docs.google.com/document/d/1e2c99FBPoBKP5sdH38pXMNk5kutps5ZMzOi3hkLgArs/edit?usp=sharing"
+            width="100%"
+            height="600px"
+            className="absolute hidden"
+          />
         </div>
       </Container>
     </ClientOnly>
-  )
-}
+  );
+};
 
 export default Home;

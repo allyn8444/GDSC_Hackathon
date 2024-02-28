@@ -62,7 +62,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </div>
       </div>
-      {/* <Categories /> */}
     </div>
   );
 };

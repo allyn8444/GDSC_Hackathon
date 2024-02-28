@@ -29,9 +29,55 @@ const OpenMap = () => {
         <span className="hidden md:block">Live Map</span>
       </button>
       {isCategoriesOpen && (
-        <div className="absolute w-[100rem] right-[-920%] top-[400%]">
-          <Categories />
+        <div
+          className="absolute inset-0 flex justify-center items-center
+                       top-[20rem] left-[-550%]"
+        >
+          <div className="relative">
+            <div
+              className="absolute top-1/2 left-1/2 transform
+                          -translate-x-1/2 -translate-y-1/2 bg-white
+                          p-6 rounded-lg shadow-2xl w-[90vw]"
+            >
+              {/* Content of your absolute div */}
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.269736026401!2d122.55977797524383!3d10.71366618943132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee5164455e2ad%3A0xa7e54669fcaddf3!2sWest%20Visayas%20State%20University!5e0!3m2!1sen!2sph!4v1709100315382!5m2!1sen!2sph"
+                // width="1000"
+                // height="600"
+                className="w-full  h-[60vh]"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="map"
+              ></iframe>
+            </div>
+          </div>
+
+          <div>{/* Your iframe or other content */}</div>
         </div>
+
+        // <div className="absolute inset-0 w-[80vw] h-[70vh] bg-slate-800 lg:bg-green-300 md:bg-red-300 left-[-900%] top-[300%]">
+        //   <div className="relative">
+        //     <div className="absolute top-0 left-0 sm:left-1/2 transform sm:-translate-x-1/2 bg-gray-200 p-4 w-[90vw]">
+        //       {/* Content of your absolute div */}
+        //       <p>This is an absolute div.</p>
+        //     </div>
+        //   </div>
+
+        //   <div>
+        //  <iframe
+        //   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.269736026401!2d122.55977797524383!3d10.71366618943132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee5164455e2ad%3A0xa7e54669fcaddf3!2sWest%20Visayas%20State%20University!5e0!3m2!1sen!2sph!4v1709100315382!5m2!1sen!2sph"
+        //   // width="1000"
+        //   // height="600"
+        //   className="w-[90%] h-[70vh] bg-white"
+        //   loading="lazy"
+        //   allowFullScreen
+        //   referrerPolicy="no-referrer-when-downgrade"
+        //   title="map"
+        // ></iframe>
+        //   </div>
+        // </div>
       )}
     </div>
   );
