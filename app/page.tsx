@@ -27,7 +27,8 @@ const Home = async ({ searchParams }: HomeProps) => {
       <Container>
         <div
           className="
-            pt-24
+          pt-16
+            md:pt-28
             grid 
             grid-cols-1 
             sm:grid-cols-2 
@@ -46,12 +47,6 @@ const Home = async ({ searchParams }: HomeProps) => {
               data={listing}
             />
           ))}
-          <iframe
-            src="https://docs.google.com/document/d/1e2c99FBPoBKP5sdH38pXMNk5kutps5ZMzOi3hkLgArs/edit?usp=sharing"
-            width="100%"
-            height="600px"
-            className="absolute hidden"
-          />
         </div>
       </Container>
     </ClientOnly>

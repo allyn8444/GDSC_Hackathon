@@ -110,7 +110,7 @@ const Categories = () => {
 
   return (
     <Container>
-      <div className="   flex justify-center">
+      <div className=" flex justify-center">
         <div
           className="
          grid

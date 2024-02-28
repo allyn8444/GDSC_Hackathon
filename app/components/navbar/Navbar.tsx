@@ -51,10 +51,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
           </div>
         </Container>
       </div>
+      {/* Desktop layout */}
       <div className="hidden md:inline-flex w-full h-[6.75rem] flex justify-center items-center">
         <div className=" w-auto flex">
           <Search />
-          <div className="w-[7.5rem] h-[3.25rem] mx-10 flex justify-center items-center rounded-lg border-2 border-black">
+          <div className=" w-[7.5rem] h-[3.25rem] mx-10 flex justify-center items-center rounded-lg border-2 border-black">
             <Filter />
           </div>
           <div className="w-[7.5rem] h-[3.25rem] flex justify-center items-center rounded-lg border-2 border-black">

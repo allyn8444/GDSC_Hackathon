@@ -11,7 +11,7 @@ const Logo = () => {
       <Image
         onClick={() => router.push("/")}
         className=" cursor-pointer"
-        src="/images/logo.png"
+        src="/images/arkila-logo.svg"
         height="100"
         width="100"
         alt="Logo"

@@ -49,7 +49,7 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
       />
       <hr />
       <div className="p-4">
-        <Button disabled={disabled} label="Reserve" onClick={onSubmit} />
+        <Button disabled={disabled} label="Continue" onClick={onSubmit} />
       </div>
       <hr />
       <div
@@ -61,10 +61,11 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
           justify-between
           font-semibold
           text-lg
+          text-black
         "
       >
         <div>Total</div>
-        <div>$ {totalPrice}</div>
+        <div>₱ {totalPrice}</div>
       </div>
     </div>
   );

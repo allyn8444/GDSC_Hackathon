@@ -42,6 +42,25 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
+          onClick={() => {
+            router.push("/");
+          }}
+          className="
+            hidden
+            md:block
+            text-sm 
+            font-semibold 
+            py-3 
+            px-4 
+            rounded-full 
+            hover:underline
+            transition 
+            cursor-pointer
+          "
+        >
+          Home
+        </div>
+        <div
           onClick={onRent}
           className="
             hidden
@@ -58,6 +77,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         >
           Create Post
         </div>
+        <div className="hidden md:block"> {currentUser?.name}</div>
+
         <div
           onClick={toggleOpen}
           className="
@@ -89,12 +110,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             rounded-xl 
             shadow-md
             w-[40vw]
-            md:w-3/4 
+            md:w-fit
             bg-white 
             overflow-hidden 
             right-0 
             top-12 
             text-sm
+            z-[2]
           "
         >
           <div className="flex flex-col cursor-pointer text-black">
@@ -106,15 +128,29 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => router.push("/favorites")}
                 />
                 <MenuItem
-                  label="Reservations"
-                  onClick={() => router.push("/reservations")}
+                  label="Bookings"
+                  onClick={() => router.push("/bookings")}
                 />
                 <MenuItem
                   label="Properties"
                   onClick={() => router.push("/properties")}
                 />
-                <MenuItem label="Create Post" onClick={rentModal.onOpen} />
+                <MenuItem
+                  label="Create Post"
+                  onClick={rentModal.onOpen}
+                  className="block md:hidden"
+                />
+                <MenuItem
+                  label="Home"
+                  onClick={rentModal.onOpen}
+                  className="block md:hidden"
+                />
                 <hr />
+                <MenuItem
+                  label={`Logged in: ${currentUser?.name}`}
+                  onClick={rentModal.onOpen}
+                  className="block md:hidden bg-red-300"
+                />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
             ) : (
