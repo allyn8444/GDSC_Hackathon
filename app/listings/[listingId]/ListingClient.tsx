@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import axios from "axios";
@@ -18,6 +19,8 @@ import ListingInfo from "@/app/components/listings/ListingInfo";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 import Button from "@/app/components/Button";
 import Contract from "@/app/components/listings/Contract";
+import Avatar from "@/app/components/Avatar";
+import ListingHost from "@/app/components/listings/ListingHost";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -65,62 +68,6 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
   const [showContract, setShowContract] = useState(false); // State variable to toggle Contract component visibility
 
-  // for contract pop up
-  // const contract = () => {
-  //   return (
-  //     <>
-  //       <div className="fixed top-0 right-0 bottom-0 left-0 flex flex-col items-center justify-center z-10 bg-white">
-  //         <div className=" w-full h-[90vh]">
-  //           <button
-  //             className="
-  //                   p-1
-  //                   border-0
-  //                   hover:opacity-70
-  //                   transition
-  //                   absolute
-  //                   right-9
-  //                   text-black
-  //                 "
-  //           >
-  //             <IoMdClose size={40} />
-  //           </button>
-  //           {/* Content */}
-  //           {/* <p className="text-center">Test</p>  w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4*/}
-  //           <iframe
-  //             src="https://docs.google.com/document/d/1e2c99FBPoBKP5sdH38pXMNk5kutps5ZMzOi3hkLgArs/edit?usp=sharing"
-  //             width="100%"
-  //             height="100%"
-  //             className=""
-  //           />
-  //         </div>
-  //         <div className="border-t-2 border-slate-800 flex  w-full justify-center items-center">
-  //           <p className="flex justify-center items-center text-black">
-  //             1. Click the &#34;Download&#34; button to save the form to your
-  //             device.
-  //             {/* <IoMdClose size={18} /> import { IoMdClose } from "react-icons/io"; */}
-  //             <br />
-  //             2. Open the downloaded form and fill it out with your information.
-  //           </p>
-  //           <div className="w-[8rem] m-4">
-  //             <Button
-  //               label="Download"
-  //               onClick={() => {
-  //                 window.open(
-  //                   "https://docs.google.com/document/d/1e2c99FBPoBKP5sdH38pXMNk5kutps5ZMzOi3hkLgArs/export?format=docx",
-  //                   "_blank"
-  //                 );
-  //               }}
-  //             />
-  //           </div>
-  //           <div className="w-[8rem] m-4">
-  //             <Button label="Continue" onClick={() => {}} />
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // };
-
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
       return loginModal.onOpen();
@@ -128,7 +75,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
     setIsLoading(true);
 
     axios
-      .post("/api/bookings", {
+      .post("/api/reservations", {
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
@@ -159,13 +106,76 @@ const ListingClient: React.FC<ListingClientProps> = ({
     }
   }, [dateRange, listing.price]);
 
+  const amenities = [
+    {
+      icon: "/images/WIFI.png",
+      label: "WiFi",
+    },
+    {
+      icon: "/images/Kitchen.png",
+      label: "Kitchen",
+    },
+    {
+      icon: "/images/TV.png",
+      label: "Television",
+    },
+    {
+      icon: "/images/Aircon.png",
+      label: "Air Condition",
+    },
+    {
+      icon: "/images/Kitchen.png",
+      label: "Washer",
+    },
+    {
+      icon: "/images/Kitchen.png",
+      label: "Dryer",
+    },
+  ];
+
+  const sustainable = [
+    {
+      icon: "/images/lightbulb.png",
+      label: "Energy Efficiency",
+    },
+    {
+      icon: "/images/trash.png",
+      label: "Waste Management",
+    },
+    {
+      icon: "/images/recycle.png",
+      label: "Use of Sustainable Materials",
+    },
+  ];
+
+  const services = [
+    {
+      icon: "/images/plug.png",
+      label: "Utilities",
+    },
+    {
+      icon: "/images/wrench.png",
+      label: "Maintenance",
+    },
+    {
+      icon: "/images/shield.png",
+      label: "Security",
+    },
+    {
+      icon: "/images/money.png",
+      label: "Value",
+    },
+  ];
   return (
     <Container>
       <div
         className="
+        //container of full list view (per post)
+      
+        
           max-w-screen-lg 
           mx-auto
-          md:pt-[6.25rem]
+          md:pt-[8rem]
         "
       >
         <div className="flex flex-col gap-6">
@@ -176,18 +186,41 @@ const ListingClient: React.FC<ListingClientProps> = ({
             id={listing.id}
             currentUser={currentUser}
           />
+          {/* AMENITIES */}
+          <div className="">
+            <h2 className="text-2xl text-black font-bold">Amenities</h2>
+            <div className="mt-2 lg:mt-0 h-fit lg:h-[5rem] grid grid-cols-2 gap-2 lg:gap-0 md:grid-cols-3 lg:flex lg:items-center lg:justify-between px-5 lg:px-8">
+              {amenities.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex text-[#10a37f] items-center gap-2 p-1 md:p-2 rounded-lg border-2 border-[#10a37f]"
+                >
+                  <img src={item.icon} alt={item.label} className="w-8 h-8 " />
+                  <span className="whitespace-nowrap">{item.label}</span>
+                </div>
+              ))}
+            </div>
+            <div className=" w-full block flex justify-end px-5 text-black py-2 lg:py-0 hover:underline">
+              <button
+                onClick={() => {
+                  alert("Function not yet deployed");
+                }}
+              >
+                Show all amenities.
+              </button>
+            </div>
+          </div>
+          {/* CONTENT - BODY */}
           <div
             className="
               grid 
               grid-cols-1 
               md:grid-cols-7 
               md:gap-10 
-              mt-6
+              
+              
             "
           >
-            {/* CONTRACT MANAGEMENT */}
-            {/* {contract()} */}
-            {/* <Contract onCreateReservation={onCreateReservation} /> */}
             <ListingInfo
               user={listing.user}
               category={category}
@@ -221,6 +254,265 @@ const ListingClient: React.FC<ListingClientProps> = ({
                   visible={true}
                 />
               )}
+            </div>
+          </div>
+          <hr className="md:hidden" />
+          {/* REVIEW */}
+          <div className="text-black grid-cols-1 grid md:grid-cols-2 mt-8 md:mt-10">
+            {/* overall rating */}
+            <div className="">
+              <div className="flex gap-2 items-center">
+                <h1 className="text-3xl font-bold">Overall Rating</h1>
+                {/* rate */}
+                <span className="flex border-[3px] border-black text-black py-1 px-3 justify-center items-center rounded-lg">
+                  <h2 className="mr-2 text-2xl font-bold">4.7</h2>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-7 h-7"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <div className="flex flex-col">
+                {/* SUSTAINABLE: RATING */}
+                <div className=" flex flex-col mt-4">
+                  {/* rate */}
+                  <span className="mb-3 flex bg-[#10a37f] w-fit text-white px-3 py-1 justify-center items-center rounded-lg">
+                    <h2 className="mr-2 text-xl font-bold">4.9</h2>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                      />
+                    </svg>
+                  </span>
+                  {sustainable.map((item, index) => (
+                    <>
+                      <div key={index} className="flex items-center my-1">
+                        <img src={item.icon} alt="" className="w-7 h-7 mr-4" />
+                        <p className="font-bold">{item.label}</p>
+                      </div>
+                    </>
+                  ))}
+                </div>
+                {/* SERVICES: RATING */}
+                <div className="flex flex-col mt-5">
+                  {/* rate */}
+                  <span className="mb-3 flex px-3 py-1 text-black border-2 border-black w-fit justify-center items-center rounded-lg">
+                    <h2 className="mr-2 text-xl font-bold">4.5</h2>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                      />
+                    </svg>
+                  </span>
+                  {services.map((item, index) => (
+                    <>
+                      <div key={index} className="flex  items-center my-2">
+                        <img src={item.icon} alt="" className="w-7 h-7 mr-4" />
+                        <p className="font-bold">{item.label}</p>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* review - comments */}
+            <hr className="my-8 md:my-0 md:hidden" />
+            <div className="">
+              <div className="flex font-bold">
+                <span>123</span>
+                <h3>&nbsp;Reviews</h3>
+              </div>
+              {/* search */}
+              <form action="" className="flex items-center mt-2 mb-4">
+                <div className="relative flex items-center w-full block">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                    />
+                  </svg>
+
+                  <input
+                    type="text"
+                    placeholder="Search Reviews"
+                    className="pl-10 pr-4 py-2 rounded-lg w-full border border-black focus:border-[#10a37f] focus:ring-[#10a37f] focus:outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  onClick={() => {
+                    alert("Function not yet deployed");
+                  }}
+                  className="mx-2 px-4 py-2 bg-[#10a37f] text-white rounded-lg  focus:outline-none"
+                >
+                  Search
+                </button>
+              </form>
+              {/* comments */}
+              <div className="flex flex-col ">
+                <div className="flex flex-col ">
+                  <div className="flex items-center">
+                    <img
+                      src="/images/placeholder.jpg"
+                      alt=""
+                      className="bg-white h-20 w-20 rounded-full border border-black"
+                    />
+                    <div className="flex flex-col  justify-center ml-4">
+                      {/* stars */}
+                      <div className="flex my-2  items-center">
+                        {[...Array(5)].map((_, index) => (
+                          <span key={index}>
+                            <img src="/images/star.png" alt="" />
+                          </span>
+                        ))}
+                        <span className="ml-2 text-gray-400">2 days ago</span>
+                      </div>
+                      {/* commenter */}
+                      <div className="flex">
+                        <span className="font-semibold">Dallas Aquino</span>
+                        <span className="mx-3 text-gray-500">
+                          Pavia, Iloilo
+                        </span>
+                      </div>
+                      {/* comment: */}
+                      <div className="mt-4">Great Service</div>
+                    </div>
+                  </div>
+                </div>
+                {/*  */}
+                <hr className="my-4" />
+                <div className="flex flex-col ">
+                  <div className="flex items-center">
+                    <img
+                      src="/images/placeholder.jpg"
+                      alt=""
+                      className="bg-white h-20 w-20 rounded-full border border-black"
+                    />
+                    <div className="flex flex-col  justify-center ml-4">
+                      {/* stars */}
+                      <div className="flex my-2  items-center">
+                        {[...Array(5)].map((_, index) => (
+                          <span key={index}>
+                            <img src="/images/star.png" alt="" />
+                          </span>
+                        ))}
+                        <span className="ml-2 text-gray-400">3 weeks ago</span>
+                      </div>
+                      {/* commenter */}
+                      <div className="flex">
+                        <span className="font-semibold">Kirk Gamo</span>
+                        <span className="mx-3 text-gray-500">
+                          La Paz, Iloilo
+                        </span>
+                      </div>
+                      {/* comment: */}
+                      <div className="mt-4">Good view</div>
+                    </div>
+                  </div>
+                </div>
+                {/*  */}
+                <hr className="my-4" />
+                <div className="flex flex-col ">
+                  <div className="flex items-center">
+                    <img
+                      src="/images/placeholder.jpg"
+                      alt=""
+                      className="bg-white h-20 w-20 rounded-full border border-black"
+                    />
+                    <div className="flex flex-col  justify-center ml-4">
+                      {/* stars */}
+                      <div className="flex my-2 items-center">
+                        {[...Array(5)].map((_, index) => (
+                          <span key={index}>
+                            <img src="/images/star.png" alt="" />
+                          </span>
+                        ))}
+                        <span className="ml-2 text-gray-400">1 week ago</span>
+                      </div>
+                      {/* commenter */}
+                      <div className="flex">
+                        <span className="font-semibold">Brennan Terre</span>
+                        <span className="mx-3 text-gray-500">
+                          Tigbauan, Iloilo
+                        </span>
+                      </div>
+                      {/* comment: */}
+                      <div className="mt-4">Spacious and clean</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* ABOUT THE HOST */}
+          <hr className="md:hidden my-4" />
+
+          <div className="text-black mt-6">
+            <div className="w-full md:w-[50%]">
+              <h1 className="text-2xl font-bold ">About the host</h1>
+
+              <ListingHost user={listing.user} />
+              {/* stars */}
+              <div className="flex">
+                {[...Array(5)].map((_, index) => (
+                  <span key={index}>
+                    <img src="/images/star.png" alt="" />
+                  </span>
+                ))}
+              </div>
+              <p className="my-4">
+                As the owner of a boarding house, my priority is to provide a
+                safe, welcoming, and nurturing environment where residents can
+                thrive and feel at home. I am committed to maintaining high
+                standards of cleanliness, security, and maintenance to ensure
+                the well-being and satisfaction of all residents.
+              </p>
+              <span className="w-[30%] block">
+                <Button
+                  label="Contact Host"
+                  onClick={() => {
+                    alert("Function not yet deployed");
+                  }}
+                />
+              </span>
             </div>
           </div>
         </div>

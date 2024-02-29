@@ -128,8 +128,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => router.push("/favorites")}
                 />
                 <MenuItem
-                  label="Bookings"
-                  onClick={() => router.push("/bookings")}
+                  label="Reservations"
+                  onClick={() => router.push("/reservations")}
                 />
                 <MenuItem
                   label="Properties"
@@ -142,14 +142,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 />
                 <MenuItem
                   label="Home"
-                  onClick={rentModal.onOpen}
+                  onClick={() => router.push("/")}
                   className="block md:hidden"
                 />
                 <hr />
+
                 <MenuItem
                   label={`Logged in: ${currentUser?.name}`}
                   onClick={rentModal.onOpen}
-                  className="block md:hidden bg-red-300"
+                  className="block md:hidden"
                 />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>

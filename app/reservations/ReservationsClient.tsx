@@ -27,7 +27,7 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
       setDeletingId(id);
 
       axios
-        .delete(`/api/bookings/${id}`)
+        .delete(`/api/reservations/${id}`)
         .then(() => {
           toast.success("Reservation cancelled");
           router.refresh();
@@ -44,9 +44,13 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
 
   return (
     <Container>
-      <Heading title="Bookings" subtitle="Bookings on your properties" />
-      <div
-        className="
+      <div className="pt-28">
+        <Heading
+          title="Reservations"
+          subtitle="Reservations on your properties"
+        />
+        <div
+          className="
           mt-10
           grid 
           grid-cols-1 
@@ -56,20 +60,22 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
           xl:grid-cols-5
           2xl:grid-cols-6
           gap-8
+          text-black
         "
-      >
-        {reservations.map((reservation: any) => (
-          <ListingCard
-            key={reservation.id}
-            data={reservation.listing}
-            reservation={reservation}
-            actionId={reservation.id}
-            onAction={onCancel}
-            disabled={deletingId === reservation.id}
-            actionLabel="Cancel guest reservation"
-            currentUser={currentUser}
-          />
-        ))}
+        >
+          {reservations.map((reservation: any) => (
+            <ListingCard
+              key={reservation.id}
+              data={reservation.listing}
+              reservation={reservation}
+              actionId={reservation.id}
+              onAction={onCancel}
+              disabled={deletingId === reservation.id}
+              actionLabel="Cancel guest reservation"
+              currentUser={currentUser}
+            />
+          ))}
+        </div>
       </div>
     </Container>
   );

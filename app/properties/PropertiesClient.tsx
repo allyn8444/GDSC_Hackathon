@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -12,42 +12,43 @@ import Container from "@/app/components/Container";
 import ListingCard from "@/app/components/listings/ListingCard";
 
 interface PropertiesClientProps {
-  listings: SafeListing[],
-  currentUser?: SafeUser | null,
+  listings: SafeListing[];
+  currentUser?: SafeUser | null;
 }
 
 const PropertiesClient: React.FC<PropertiesClientProps> = ({
   listings,
-  currentUser
+  currentUser,
 }) => {
   const router = useRouter();
-  const [deletingId, setDeletingId] = useState('');
+  const [deletingId, setDeletingId] = useState("");
 
-  const onDelete = useCallback((id: string) => {
-    setDeletingId(id);
+  const onDelete = useCallback(
+    (id: string) => {
+      setDeletingId(id);
 
-    axios.delete(`/api/listings/${id}`)
-    .then(() => {
-      toast.success('Listing deleted');
-      router.refresh();
-    })
-    .catch((error) => {
-      toast.error(error?.response?.data?.error)
-    })
-    .finally(() => {
-      setDeletingId('');
-    })
-  }, [router]);
+      axios
+        .delete(`/api/listings/${id}`)
+        .then(() => {
+          toast.success("Listing deleted");
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.error);
+        })
+        .finally(() => {
+          setDeletingId("");
+        });
+    },
+    [router]
+  );
 
-
-  return ( 
+  return (
     <Container>
-      <Heading
-        title="Properties"
-        subtitle="List of your properties"
-      />
-      <div 
-        className="
+      <div className="pt-28">
+        <Heading title="Properties" subtitle="List of your properties" />
+        <div
+          className="
           mt-10
           grid 
           grid-cols-1 
@@ -57,22 +58,24 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
           xl:grid-cols-5
           2xl:grid-cols-6
           gap-8
+          text-black
         "
-      >
-        {listings.map((listing: any) => (
-          <ListingCard
-            key={listing.id}
-            data={listing}
-            actionId={listing.id}
-            onAction={onDelete}
-            disabled={deletingId === listing.id}
-            actionLabel="Delete property"
-            currentUser={currentUser}
-          />
-        ))}
+        >
+          {listings.map((listing: any) => (
+            <ListingCard
+              key={listing.id}
+              data={listing}
+              actionId={listing.id}
+              onAction={onDelete}
+              disabled={deletingId === listing.id}
+              actionLabel="Delete property"
+              currentUser={currentUser}
+            />
+          ))}
+        </div>
       </div>
     </Container>
-   );
-}
- 
+  );
+};
+
 export default PropertiesClient;

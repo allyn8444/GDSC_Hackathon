@@ -60,7 +60,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           <Avatar src={user?.image} />
         </div>
         <div
-          className="
+          className=" 
             flex 
             flex-row 
             items-center 
