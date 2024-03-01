@@ -133,13 +133,21 @@ const ListingCard: React.FC<ListingCardProps> = ({
           {location?.region}, {location?.label}
         </div>
 
-        <div className="flex flex-row items-center gap-1">
-          <div className="font-light text-neutral-500 mr-4">
-            {reservationDate || data.category}
-          </div>
-          <div className="font-semibold">₱ {price}</div>
-          {!reservation && <div className="font-light">per month</div>}
+        <div className="font-light text-neutral-500 mr-4">
+  {reservationDate && (
+    <>
+      <div>{reservationDate.split(' - ')[0]} -</div>
+      <div className="mt-1">{reservationDate.split(' - ')[1]}</div>
+    </>
+  )}
+  {!reservationDate && <div>{data.category}</div>}
+</div>
+
+           <div className="flex flex-row items-center gap-1">
+             <div className="font-semibold">₱ {price.toLocaleString()}</div>
+          {!reservation && <div className="font-light">per month</div>} 
         </div>
+
         <div>WiFi, Air Conditioning, TV, etc..</div>
         {onAction && actionLabel && (
           <Button

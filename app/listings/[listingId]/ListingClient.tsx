@@ -108,7 +108,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   const amenities = [
     {
-      icon: "/images/WIFI.png",
+      icon: "/images/WIFI.svg",
       label: "WiFi",
     },
     {
@@ -123,12 +123,13 @@ const ListingClient: React.FC<ListingClientProps> = ({
       icon: "/images/Aircon.png",
       label: "Air Condition",
     },
+    
     {
-      icon: "/images/Kitchen.png",
+      icon: "/images/Washer.svg",
       label: "Washer",
     },
     {
-      icon: "/images/Kitchen.png",
+      icon: "/images/Dryer.svg",
       label: "Dryer",
     },
   ];

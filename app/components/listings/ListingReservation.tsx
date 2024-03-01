@@ -48,8 +48,8 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
         onChange={(value) => onChangeDate(value.selection)}
       />
       <hr />
-      <div className="p-4">
-        <Button disabled={disabled} label="Continue" onClick={onSubmit} />
+      <div className="p-4 font-medium">
+        <Button disabled={disabled} label="Book Now" onClick={onSubmit} />
       </div>
       <hr />
       <div
