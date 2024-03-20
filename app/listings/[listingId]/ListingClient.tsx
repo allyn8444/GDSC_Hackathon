@@ -116,7 +116,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       label: "Kitchen",
     },
     {
-      icon: "/images/TV.png",
+      icon: "/images/Monitor.svg",
       label: "Television",
     },
     {
@@ -125,12 +125,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
     },
     
     {
-      icon: "/images/Washer.svg",
-      label: "Washer",
+      icon: "/images/Car.svg",
+      label: "Parking",
     },
     {
-      icon: "/images/Dryer.svg",
-      label: "Dryer",
+      icon: "/images/DesktopTower.svg",
+      label: "Workspace",
     },
   ];
 
