@@ -66,7 +66,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
-  const [showContract, setShowContract] = useState(false); // State variable to toggle Contract component visibility
+  const [showContract, setShowContract] = useState(false); 
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -249,7 +249,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                 disabled={isLoading}
                 disabledDates={disabledDates}
               />
-              {showContract && ( // Conditionally render Contract component based on showContract state
+              {showContract && ( 
                 <Contract
                   onCreateReservation={onCreateReservation}
                   visible={true}
@@ -258,13 +258,13 @@ const ListingClient: React.FC<ListingClientProps> = ({
             </div>
           </div>
           <hr className="md:hidden" />
-          {/* REVIEW */}
+          
           <div className="text-black grid-cols-1 grid md:grid-cols-2 mt-8 md:mt-10">
-            {/* overall rating */}
+            
             <div className="">
               <div className="flex gap-2 items-center">
                 <h1 className="text-3xl font-bold">Overall Rating</h1>
-                {/* rate */}
+                
                 <span className="flex border-[3px] border-black text-black py-1 px-3 justify-center items-center rounded-lg">
                   <h2 className="mr-2 text-2xl font-bold">4.7</h2>
                   <svg

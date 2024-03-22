@@ -14,6 +14,9 @@ module.exports = {
         yellow:{
           900: '#FF8200',
         },
+        blue:{
+          900: '#4eb2dc', 
+        },
       },
       fontFamily: {
         'Mont': ['Montserrat', 'sans-serif'],

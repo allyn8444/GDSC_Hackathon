@@ -67,10 +67,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return `${format(start, 'PP')} - ${format(end, 'PP')}`;
   }, [reservation]);
 
-  // Initialize state for the rating
-  const [rating] = useState(((Math.random() * (5 - 3.5)) + 3.5).toFixed(1)); // Generates a random number with one decimal place between 1 and 5
+  const [rating] = useState(((Math.random() * (5 - 3.5)) + 3.5).toFixed(1)); 
 
-  const shouldDisplayBadge = Math.random() <= 0.3; // 30% probability
+  const shouldDisplayBadge = Math.random() <= 0.5;
 
 
   return (
@@ -78,6 +77,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
       <div className="flex flex-col gap-2 w-full rounded-lg p-2 shadow-lg">
         <div className="aspect-square w-full relative overflow-hidden rounded-xl">
           <Image fill className="object-cover h-full w-full group-hover:scale-110 transition" src={data.imageSrc} alt="Listing" />
+            <div className="absolute top-3 left-3">
+             {shouldDisplayBadge && <img src='/images/Verified-Badge.svg' alt="Verified Badge" className="w-8 h-8"/>}
+            </div>
           <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
@@ -108,14 +110,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
       </>
     )}
     {!reservationDate && <div>{data.category}</div>} 
-    {shouldDisplayBadge && (
-      <div className="flex items-center ml-4">
-        <img src='/images/SealCheck.svg' alt="Verified Badge" className="w-4 h-4 mr-1" />
-        <div className="text-xs font-bold font-Mont text-yellow-900">Verified</div>
-      </div>
-    )}
   </div>
-
 
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">₱ {price.toLocaleString()}</div>
@@ -125,10 +120,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <div>WiFi, Air Conditioning, TV, etc..</div>
         {onAction && actionLabel && (
           <Button disabled={disabled} small label={actionLabel} onClick={handleCancel} />
-        )}
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default ListingCard;
+    );
+  };
+  
+  export default ListingCard;
