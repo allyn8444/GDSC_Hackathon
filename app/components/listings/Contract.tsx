@@ -58,7 +58,7 @@ const Contract: React.FC<ContractProps> = ({
             </div>
           </div>
           <div className="border-t-2 border-[#10a37f] flex  w-full justify-center items-center">
-            <p className="flex justify-center items-center text-black">
+            <p className="flex justify-center items-center text-black m-4 md:m-0">
               1. Click the &#34;Download&#34; button to save the form to your
               device.
               {/* <IoMdClose size={18} /> import { IoMdClose } from "react-icons/io"; */}

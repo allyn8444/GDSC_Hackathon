@@ -78,7 +78,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <div className="aspect-square w-full relative overflow-hidden rounded-xl">
           <Image fill className="object-cover h-full w-full group-hover:scale-110 transition" src={data.imageSrc} alt="Listing" />
             <div className="absolute top-3 left-3">
-             {shouldDisplayBadge && <img src='/images/Verified-Badge.svg' alt="Verified Badge" className="w-8 h-8"/>}
+             {shouldDisplayBadge && <img src='/images/Verified-Badge.svg' alt="Verified Badge" className="w-12 h-12"/>}
             </div>
           <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
@@ -114,7 +114,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">₱ {price.toLocaleString()}</div>
-          {!reservation && <div className="font-light">per month</div>}
+          {!reservation && <div className="font-light text-neutral-600">per month</div>}
         </div>
 
         <div>WiFi, Air Conditioning, TV, etc..</div>
